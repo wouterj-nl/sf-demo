@@ -1,0 +1,13 @@
+services:
+    app.repository.bank_account:
+        class: AppBundle\Repository\BankAccount
+        autowire: true
+
+    app.reader.rabo:
+        class: AppBundle\Finance\RaboCsvReader
+        autowire: true
+
+    app.twig_extension:
+        class: AppBundle\Twig\AppExtension
+        tags:
+            - { name: twig.extension }

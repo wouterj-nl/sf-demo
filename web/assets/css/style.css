@@ -1,0 +1,19 @@
+body{
+    font-family:'Segoe UI light', 'Helvetica Neue', 'Segoe UI', 'Segoe WP', sans-serif;
+    font-size:18px;
+    font-weight:200;
+    color:#333;
+}
+
+.debit-table,
+.credit-table{
+    float:left;
+}
+.credit-table{
+    margin-left:50px;
+}
+
+.money{
+    font-size:1.1em;
+    text-align:right;
+}
