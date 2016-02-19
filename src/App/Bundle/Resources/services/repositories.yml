@@ -1,0 +1,8 @@
+services:
+    app.repository.wallet:
+        class: App\Bundle\Transaction\DoctrineWalletRepository
+        arguments: ['@doctrine.orm.entity_manager']
+
+    app.repository.transaction:
+        class: App\Bundle\Transaction\DoctrineTransactionRepository
+        arguments: ['@doctrine.orm.entity_manager']

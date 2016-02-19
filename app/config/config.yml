@@ -63,14 +63,13 @@ doctrine:
             money:
                 mapping: true
                 type: yml
-                dir: "%kernel.root_dir%/config/doctrine/"
+                dir: "%kernel.root_dir%/config/doctrine/money"
                 prefix: Money
-            finance:
+            AppBundle:
                 mapping: true
-                type: annotation
-                dir: "%kernel.root_dir%/../src/AppBundle/Finance"
-                prefix: AppBundle\Finance
-                alias: Finance
+                type: yml
+                dir: "../resources/doctrine/"
+                prefix: App\Finance
 
 # Swiftmailer Configuration
 swiftmailer:
@@ -79,3 +78,6 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+
+command_bus:
+    command_name_resolver_strategy: named_message

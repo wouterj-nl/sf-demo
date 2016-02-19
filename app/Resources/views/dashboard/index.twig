@@ -1,0 +1,29 @@
+{% extends 'base.twig' %}
+
+{% block title %}Dashboard | Finance{% endblock %}
+
+{% block body %}
+    <h1 class="page-name">Dashboard <a class="action-button" href="{{ path('create_wallet') }}">Add wallet</a></h1>
+
+    <div class="wallet-list">
+        {% for wallet in wallets %}
+        <section class="wallet">
+            <h1 class="wallet__name">{{ wallet.name }}</h1>
+            <a href="{{ path('book_transaction', {from: wallet.id}) }}" class="action-button action-button--wallet">Book Transaction</a>
+            <span class="wallet__money">{{ wallet.money }}</span>
+
+            <h3>Transactions <small><i>(last 5)</i></small></h3>
+            <ul class="transaction-list">
+                {% for transaction in wallet.transactions   [0:5] %}
+                <li>
+                    <span class="transaction  transaction--{{ transaction.isDebit ? 'debit' : 'credit' }}">
+                        {{ transaction.isDebit ? '+' : '-' }}{{ transaction.money }}
+                    </span>
+                    {{ transaction.description }}
+                </li>
+                {% endfor %}
+            </ul>
+        </section>
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -1,0 +1,23 @@
+services:
+    app.form.book_transaction:
+        class: App\Bundle\Form\BookTransactionForm
+        arguments: ['@app.repository.wallet']
+        tags:
+            - { name: form.type }
+
+    app.command_bus_middleware.validator:
+        class: App\Bundle\CommandBus\ValidatorMiddleware
+        arguments: ['@validator']
+        tags:
+            - { name: command_bus_middleware }
+
+    app.validator.unique:
+        class: App\Bundle\Validator\UniqueValidator
+        arguments: ['@doctrine']
+        tags:
+            - { name: validator.constraint_validator, alias: app.validator.unique }
+
+    app.twig.extension:
+        class: App\Bundle\Twig\AppExtension
+        tags:
+            - { name: twig.extension }

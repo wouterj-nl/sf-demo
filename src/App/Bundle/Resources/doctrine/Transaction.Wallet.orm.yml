@@ -1,0 +1,10 @@
+App\Finance\Transaction\Wallet:
+    type:  entity
+    table: wallets
+    id:
+        id: { type: guid }
+    fields:
+        name: { type: string }
+        own:  { type: boolean }
+    embedded:
+        money: { class: Money\Money }

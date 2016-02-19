@@ -1,0 +1,13 @@
+App\Finance\Transaction\Transaction:
+    type:  entity
+    table: transactions
+    id:
+        id: { type: guid }
+    fields:
+        date:        { type: datetime }
+        description: { type: string }
+    embedded:
+        money: { class: Money\Money }
+    oneToOne:
+        from: { targetEntity: App\Finance\Transaction\Wallet }
+        to: { targetEntity: App\Finance\Transaction\Wallet }

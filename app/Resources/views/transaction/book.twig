@@ -1,0 +1,29 @@
+{% extends 'base.twig' %}
+
+{% block title %}Book a transaction | Finance{% endblock %}
+
+{% block body %}
+    <h1 class="page-name">Create a new Wallet</h1>
+
+    {{ form_start(form) }}
+
+    {# todo: use form theming #}
+    {{ form_widget(form.money, {attr: {placeholder: 'Amount of money', class: form.vars.valid ?: 'invalid'}}) }}<br>
+    {% if not form.vars.valid %}{{ form_errors(form.money) }}<br>{% endif %}
+
+    from {{ form_widget(form.from, {attr: {class: form.vars.valid ?: 'invalid'}}) }}<br>
+    {% if not form.vars.valid %}{{ form_errors(form.from) }}<br>{% endif %}
+
+    to {{ form_widget(form.to, {attr: {class: form.vars.valid ?: 'invalid'}}) }}<br>
+    {% if not form.vars.valid %}{{ form_errors(form.to) }}<br>{% endif %}
+
+    on {{ form_widget(form.date, {attr: {class: form.vars.valid ?: 'invalid'}}) }}<br>
+    {% if not form.vars.valid %}{{ form_errors(form.date) }}<br>{% endif %}
+
+    {{ form_widget(form.description, {attr: {placeholder: 'Description', class: form.vars.valid ?: 'invalid'}}) }}<br>
+    {% if not form.vars.valid %}{{ form_errors(form.description) }}<br>{% endif %}
+
+    <input type="submit" value="Create">
+
+    {{ form_end(form) }}
+{% endblock %}

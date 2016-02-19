@@ -1,16 +1,20 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
     <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}
-            <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
-        {% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-        {% block head %}{% endblock %}
+        <meta charset="utf-8">
+
+        <title>{% block title %}Finance{% endblock %}</title>
+
+        <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+
+        {% block post_head %}{% endblock %}
     </head>
+
     <body>
+        {% block pre_body %}{% endblock %}
+
         {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+
+        {% block post_body %}{% endblock %}
     </body>
 </html>

@@ -1,0 +1,17 @@
+{% extends 'base.twig' %}
+
+{% block body %}
+    <h1>Create a new Wallet</h1>
+
+    {{ form_start(form) }}
+
+    {{ form_widget(form.name, {attr: {class: form.vars.valid ?: 'invalid'}}) }}<br>
+    {% if not form.vars.valid %}{{ form_errors(form.name) }}<br>{% endif %}
+
+    {{ form_widget(form.owner) }}
+    {{ form_label(form.owner) }}<br>
+
+    <input type="submit" value="Create">
+
+    {{ form_end(form) }}
+{% endblock %}
