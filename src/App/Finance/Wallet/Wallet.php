@@ -16,10 +16,6 @@ class Wallet
     private $id;
     /** @var string */
     private $name;
-    /** @var ArrayCollection */
-    private $creditTransactions;
-    /** @var ArrayCollection */
-    private $debitTransactions;
     /** @var Money */
     private $money;
     /** @var bool */
@@ -30,8 +26,6 @@ class Wallet
         $this->id = $id;
         $this->name = $name;
         $this->money = $money;
-        $this->creditTransactions = new ArrayCollection();
-        $this->debitTransactions = new ArrayCollection();
     }
 
     public static function ours($id, $name, Money $money)

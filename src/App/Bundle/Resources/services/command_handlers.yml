@@ -1,6 +1,6 @@
 services:
     app.handler.wallet.create:
-        class: App\Finance\Transaction\Handler\CreateWalletHandler
+        class: App\Finance\Wallet\Handler\CreateWalletHandler
         arguments: ['@app.repository.wallet']
         tags:
             - { name: command_handler, handles: create_wallet }

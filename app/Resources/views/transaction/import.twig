@@ -1,0 +1,15 @@
+{% extends 'base.twig' %}
+
+{% block title %}Import Transactions | Finance{% endblock %}
+
+{% block body %}
+    <h1 class="page-name">Importing Transactions from other Services</h1>
+
+    {{ form_start(form) }}
+    {{ form_widget(form.transaction_file, {attr: {class: form.vars.valid ?: 'invalid'}}) }}<br>
+    {% if not form.vars.valid %}{{ form_errors(form.transaction_file) }}<br>{% endif %}
+
+    <input type="submit" value="Import"/>
+
+    {{ form_end(form) }}
+{% endblock %}

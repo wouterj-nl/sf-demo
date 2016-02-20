@@ -1,4 +1,4 @@
-App\Finance\Transaction\Wallet:
+App\Finance\Wallet\Wallet:
     type:  entity
     table: wallets
     id:

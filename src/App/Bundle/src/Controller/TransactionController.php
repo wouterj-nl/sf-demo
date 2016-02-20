@@ -3,14 +3,17 @@
 namespace App\Bundle\Controller;
 
 use App\Bundle\Form\BookTransactionForm;
+use App\Bundle\Form\ImportForm;
 use App\Finance\Transaction\Command\BookTransaction;
 use App\Finance\Transaction\Command\RegisterBankAccount;
+use App\Finance\Transaction\Import\ImportedTransaction;
 use App\Finance\Wallet\WalletId;
 use Money\Currency;
 use Money\Money;
 use Ramsey\Uuid\Uuid;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -44,5 +47,23 @@ class TransactionController extends Controller
         }
 
         return $this->render('transaction/book.twig', ['form' => $form->createView()]);
+    }
+
+    /** @Route("/transaction/import", name="import_transactions") */
+    public function import(Request $request)
+    {
+        $form = $this->createForm(ImportForm::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            /** @var UploadedFile $file */
+            $file = $form->get('transaction_file')->getData();
+
+
+            $transactions = $this->get('app.importer')->parseTransactions(file_get_contents($file->getPathname()));
+            dump($this->get('app.guesser')->guessToWallet($transactions[1]));
+        }
+
+        return $this->render('transaction/import.twig', ['form' => $form->createView()]);
     }
 }

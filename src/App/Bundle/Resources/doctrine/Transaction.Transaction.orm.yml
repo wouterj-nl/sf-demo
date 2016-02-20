@@ -9,5 +9,5 @@ App\Finance\Transaction\Transaction:
     embedded:
         money: { class: Money\Money }
     oneToOne:
-        from: { targetEntity: App\Finance\Transaction\Wallet }
-        to: { targetEntity: App\Finance\Transaction\Wallet }
+        from: { targetEntity: App\Finance\Wallet\Wallet }
+        to: { targetEntity: App\Finance\Wallet\Wallet }
