@@ -44,5 +44,17 @@ Questions?
 Feel free to create an issue to ask some questions or suggest some other
 best practices or talk to me on IRC (WouterJ on freenode).
 
+Interesting Reads
+-----------------
+
+Lots of the concepts used in this project are well documented in blog posts.
+Reading them will provide more background information.
+
+ * [Code Folder Structure, Mathias Verraes](http://verraes.net/2011/10/code-folder-structure/)
+ * [A wave of command buses, Matthias Noback](http://php-and-symfony.matthiasnoback.nl/2015/01/a-wave-of-command-buses/)
+ * [Hexagonal Architecture, Matthias Noback](https://www.youtube.com/watch?v=fgQWnglnGeU)
+ * [Integrate Symfony and Webpack, Benjamin Eberlei](http://www.whitewashing.de/2015/02/26/integrate_symfony_and_webpack.html)
+ * [The Symfony Framework Best Practices](http://symfony.com/doc/current/best_practices/introduction.html)
+
  [reactjs]: https://facebook.github.io/react/
  [webpack]: https://webpack.github.io/
