@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the WouterJ Symfony Example package.
+ *
+ * (c) 2016 Wouter de Jong
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace App\Finance\Transaction;
 
 use App\Finance\Wallet\Wallet;
@@ -9,7 +18,7 @@ use Ramsey\Uuid\Uuid;
 /**
  * Represents a money transaction from one wallet to another.
  *
- * @author Wouter J <wouter@wouterj.nl>
+ * @author Wouter de Jong <wouter@wouterj.nl>
  */
 class Transaction
 {
@@ -26,6 +35,9 @@ class Transaction
     /** @var Wallet */
     private $to;
 
+    // This constructor is not public, as we cannot create
+    // transactions; the user booked a transaction.
+    // http://verraes.net/2014/06/named-constructors-in-php/
     private function __construct(Uuid $id, Money $money, Wallet $from, Wallet $to, \DateTime $date, $description)
     {
         $this->id = $id;

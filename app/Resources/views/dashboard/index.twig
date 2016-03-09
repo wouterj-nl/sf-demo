@@ -2,11 +2,13 @@
 
 {% block title %}Dashboard | Finance{% endblock %}
 
-{% block body %}
-    <h1 class="page-name">Dashboard <a class="action-button" href="{{ path('create_wallet') }}">Add wallet</a></h1>
+{% block post_body %}
+    <script src="{{ asset('assets/dashboard.bundle.js') }}"></script>
+{% endblock %}
 
-    <div class="wallet-list">
-        {% for wallet in wallets %}
+{% block body %}
+    <div id="js-wallet-list">
+        {# for wallet in wallets %}
         <section class="wallet">
             <h1 class="wallet__name">{{ wallet.name }}</h1>
             <a href="{{ path('book_transaction', {from: wallet.id}) }}" class="action-button action-button--wallet">Book Transaction</a>
@@ -24,6 +26,8 @@
                 {% endfor %}
             </ul>
         </section>
-        {% endfor %}
+        {% endfor #}
     </div>
+
+    <div id="js-form"></div>
 {% endblock %}

@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the WouterJ Symfony Example package.
+ *
+ * (c) 2016 Wouter de Jong
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace App\Finance\Wallet;
 
 use App\Finance\Transaction\Transaction;
@@ -21,6 +30,7 @@ class Wallet
     /** @var bool */
     private $own = true;
 
+    // See Transaction::__construct() about why this is private
     private function __construct(WalletId $id, $name, Money $money)
     {
         $this->id = $id;

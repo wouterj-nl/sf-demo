@@ -1,0 +1,45 @@
+body > form{
+  margin:0 auto;
+  width:400px;
+}
+input[type=text]{
+  border:0;
+  background:none;
+  border-bottom:1px solid #aaa;
+  margin-top:10px;
+  margin-bottom:1px;
+
+  font-size:inherit;
+  font-family:inherit;
+  font-weight:200;
+
+  &:focus{
+    border-bottom:2px solid #42A5F5;
+    margin-bottom:0;
+    outline:none!important;
+  }
+}
+::-webkit-input-placeholder{
+  color:#888;
+}
+
+input[type=submit]{
+  padding:10px;
+  background:#42a5f5;
+  color:#ffffff;
+  font-weight:bold;
+  border:none;
+}
+
+input.invalid{
+  border-bottom:2px solid #F44336!important;
+  margin-bottom:0!important;
+}
+.errors ul{
+  margin-top:2px;
+  color:#E53935;
+  font-size:.7em;
+  font-weight:bold;
+  padding:0;
+  list-style:none;
+}

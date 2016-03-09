@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the WouterJ Symfony Example package.
+ *
+ * (c) 2016 Wouter de Jong
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace App\Bundle\Transaction;
 
 use App\Finance\Wallet\WalletRepository;
@@ -8,7 +17,9 @@ use App\Finance\Wallet\WalletId;
 use Doctrine\ORM\EntityManager;
 
 /**
- * @author Wouter J <wouter@wouterj.nl>
+ * A Doctrine ORM implementation for the WalletRepository.
+ *
+ * @author Wouter de Jong <wouter@wouterj.nl>
  */
 class DoctrineWalletRepository implements WalletRepository
 {
@@ -44,6 +55,9 @@ class DoctrineWalletRepository implements WalletRepository
 
     public function flush()
     {
+        // @todo this is really bad, you should never flush
+        //       the complete system. However, I need to find
+        //       a way to only flush wallets...
         $this->entityManager->flush();
     }
 }

@@ -10,6 +10,7 @@ use App\Finance\Wallet\Wallet;
 use App\Finance\Wallet\WalletId;
 use Money\Money;
 use Prophecy\Argument;
+use Ramsey\Uuid\Uuid;
 
 /**
  * @author Wouter J <wouter@wouterj.nl>
@@ -29,29 +30,49 @@ class BookTransactionHandlerTest extends \PHPUnit_Framework_TestCase
 
     public function testPersistsTransactionAndDebitsCreditsWallets()
     {
-        $command = new BookTransaction(Money::EUR(1000), new WalletId(1), new WalletId(2), 'Today\'s diner.');
+        $command = new BookTransaction(
+            Uuid::uuid4(),
+            Money::EUR(1000),
+            new WalletId(1),
+            new WalletId(2),
+            new \DateTime(),
+            'Today\'s diner.'
+        );
 
-        $wallet1 = $this->prophesize(Wallet::class);
-        $wallet1->creditTransaction(Argument::that(function ($transaction) {
-            return $transaction instanceof Transaction && Money::EUR(1000) == $transaction->money();
-        }))->shouldBeCalled();
+
+        $wallet1 = $this->getWalletProphet(Money::EUR(1000));
         $this->walletRepository->oneById(new WalletId(1))->willReturn($wallet1);
 
-        $wallet2 = $this->prophesize(Wallet::class);
-        $wallet2->debitTransaction(Argument::that(function ($transaction) {
-            return $transaction instanceof Transaction && Money::EUR(1000) == $transaction->money();
-        }))->shouldBeCalled();
+        $wallet2 = $this->getWalletProphet(Money::EUR(1000), false);
         $this->walletRepository->oneById(new WalletId(2))->willReturn($wallet2);
 
-        $this->transactionRepository->persist(Argument::that(function ($transaction) {
+        $this->walletRepository->flush()->shouldBeCalled();
+
+        $this->transactionRepository->persist(Argument::that(function ($transaction) use ($wallet1, $wallet2) {
             return $transaction instanceof Transaction
                 && Money::EUR(1000) == $transaction->money()
-                && (new WalletId(1))->equals($transaction->fromWallet())
-                && (new WalletId(2))->equals($transaction->toWallet())
+                && $wallet1 === $transaction->from()
+                && $wallet2 === $transaction->to()
                 && 'Today\'s diner.' === $transaction->description()
             ;
         }))->shouldBeCalled();
 
         $this->handler->handle($command);
+    }
+
+    private function getWalletProphet(Money $money, $credit = true)
+    {
+        $wallet = $this->prophesize(Wallet::class);
+        $argProphet = Argument::that(function ($transaction) use ($money) {
+            return $transaction instanceof Transaction && $money == $transaction->money();
+        });
+
+        if ($credit) {
+            $wallet->bookCredit($argProphet)->shouldBeCalled();
+        } else {
+            $wallet->bookDebit($argProphet)->shouldBeCalled();
+        }
+
+        return $wallet->reveal();
     }
 }

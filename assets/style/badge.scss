@@ -1,0 +1,11 @@
+.badge{
+  display:inline-block;
+  font-size:.8em;
+  padding:2px 10px;
+  color:rgba(#ffffff, .7);
+  border-radius:2px;
+  cursor:default;
+}
+.badge--green   { background:#4CAF50; }
+.badge--red     { background:#F44336; }
+.badge--neutral { background:#9E9E9E; }

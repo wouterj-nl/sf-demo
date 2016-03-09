@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Finance\Transaction;
+namespace App\Finance\Wallet;
 
-use App\Finance\Wallet\Wallet;
-use App\Finance\Wallet\WalletId;
+use App\Finance\Transaction\Transaction;
 use Money\Money;
 
 /**
@@ -60,18 +59,6 @@ class WalletTest extends \PHPUnit_Framework_TestCase
         $wallet->bookCredit($this->createTransaction(Money::EUR(5000)));
 
         $this->assertEquals(Money::EUR(-5000), $wallet->money());
-    }
-
-    public function testTransactions()
-    {
-        $wallet = Wallet::ours(1, 'Income', Money::EUR(0));
-
-        $wallet->bookDebit($transaction1 = $this->createTransaction(Money::EUR(100000)));
-        $wallet->bookCredit($transaction2 = $this->createTransaction(Money::EUR(30000)));
-        $wallet->bookCredit($transaction3 = $this->createTransaction(Money::EUR(40000)));
-
-        $this->assertEquals(Money::EUR(30000), $wallet->money());
-        $this->assertEquals([$transaction1, $transaction2, $transaction3], $wallet->transactions());
     }
 
     private function createTransaction(Money $money)

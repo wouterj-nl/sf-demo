@@ -1,11 +1,19 @@
 <?php
 
+/*
+ * This file is part of the WouterJ Symfony Example package.
+ *
+ * (c) 2016 Wouter de Jong
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace App\Bundle\Form;
 
 use App\Finance\Wallet\WalletRepository;
 use App\Finance\Wallet\Wallet;
 use App\Finance\Wallet\WalletId;
-use Ramsey\Uuid\Uuid;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -15,9 +23,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 
-/**
- * @author Wouter J <wouter@wouterj.nl>
- */
 class BookTransactionForm extends AbstractType
 {
     /** @var WalletRepository */
@@ -32,11 +37,11 @@ class BookTransactionForm extends AbstractType
     {
         $builder
             ->add('from', EntityType::class, [
-                'class' => Wallet::class,
+                'class'        => Wallet::class,
                 'choice_label' => 'name',
             ])
             ->add('to', EntityType::class, [
-                'class' => Wallet::class,
+                'class'        => Wallet::class,
                 'choice_label' => 'name',
             ])
             ->add('money', MoneyType::class)

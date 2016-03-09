@@ -11,6 +11,12 @@ services:
         tags:
             - { name: form.type }
 
+    app.negotiation_listener:
+        class: App\Bundle\EventListener\NegotiationListener
+        autowire: true
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, method: configureContentType }
+
     app.command_bus_middleware.validator:
         class: App\Bundle\CommandBus\ValidatorMiddleware
         arguments: ['@validator']
@@ -22,8 +28,3 @@ services:
         arguments: ['@doctrine']
         tags:
             - { name: validator.constraint_validator, alias: app.validator.unique }
-
-    app.twig.extension:
-        class: App\Bundle\Twig\AppExtension
-        tags:
-            - { name: twig.extension }

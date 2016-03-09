@@ -1,69 +1,79 @@
 <?php
 
+/*
+ * This file is part of the WouterJ Symfony Example package.
+ *
+ * (c) 2016 Wouter de Jong
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace App\Bundle\Controller;
 
-use App\Bundle\Form\BookTransactionForm;
-use App\Bundle\Form\ImportForm;
+use App\Bundle\Exception\InvalidCommandException;
+use App\Bundle\Util\FlattenViolationList;
 use App\Finance\Transaction\Command\BookTransaction;
-use App\Finance\Transaction\Command\RegisterBankAccount;
 use App\Finance\Transaction\Import\ImportedTransaction;
-use App\Finance\Wallet\WalletId;
-use Money\Currency;
 use Money\Money;
 use Ramsey\Uuid\Uuid;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * @author Wouter J <wouter@wouterj.nl>
+ * @author Wouter de Jong <wouter@wouterj.nl>
  */
 class TransactionController extends Controller
 {
-    /** @Route("/transaction/book", name="book_transaction") */
+    /**
+     * @Route("/transactions", name="book_transaction")
+     * @Method("POST")
+     */
     public function book(Request $request)
     {
-        $form = $this->createForm(BookTransactionForm::class);
-        if ($request->query->has('from')) {
-            $form->get('from')->setData(new WalletId(Uuid::fromString($request->query->get('from'))));
-        }
+        // See WalletController::create() for more information
+        $command = new BookTransaction(
+            $id = Uuid::uuid4(),
+            Money::EUR(intval($request->request->get('amount') * 100)),
+            $request->request->get('from'),
+            $request->request->get('to'),
+            new \DateTime($request->request->get('date')),
+            $request->request->get('description')
+        );
 
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $command = new BookTransaction(
-                Uuid::uuid4(),
-                Money::EUR(intval($form['money']->getData() * 100)),
-                $form['from']->getData()->id(),
-                $form['to']->getData()->id(),
-                $form['date']->getData(),
-                $form['description']->getData()
-            );
-
+        try {
             $this->get('command_bus')->handle($command);
-
-            return $this->redirectToRoute('homepage');
+        } catch (InvalidCommandException $e) {
+            // See WalletController::create() for more information
+            return new JsonResponse([
+                'errors' => (new FlattenViolationList($e->violations()))->toArray(),
+            ], 400);
         }
 
-        return $this->render('transaction/book.twig', ['form' => $form->createView()]);
+        return new JsonResponse(['transaction_id' => $id], JsonResponse::HTTP_CREATED);
     }
 
-    /** @Route("/transaction/import", name="import_transactions") */
+    /**
+     * @Route("/api/transactions/import", name="import_transactions")
+     * @Method("POST")
+     */
     public function import(Request $request)
     {
-        $form = $this->createForm(ImportForm::class);
-        $form->handleRequest($request);
+        $imports = $this->get('app.importer')->parseTransactions($request->getContent());
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            /** @var UploadedFile $file */
-            $file = $form->get('transaction_file')->getData();
+        return new JsonResponse(array_map([$this, 'formatImport'], $imports));
+    }
 
-
-            $transactions = $this->get('app.importer')->parseTransactions(file_get_contents($file->getPathname()));
-            dump($this->get('app.guesser')->guessToWallet($transactions[1]));
-        }
-
-        return $this->render('transaction/import.twig', ['form' => $form->createView()]);
+    private function formatImport(ImportedTransaction $transaction)
+    {
+        return [
+            'id'          => $transaction->id(),
+            'money'       => ['amount' => $transaction->money()->getAmount() / 100],
+            'date'        => $transaction->date()->format('c'),
+            'description' => $transaction->description(),
+        ];
     }
 }

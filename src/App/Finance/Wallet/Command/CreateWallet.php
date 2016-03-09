@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the WouterJ Symfony Example package.
+ *
+ * (c) 2016 Wouter de Jong
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace App\Finance\Wallet\Command;
 
 use Money\Money;
@@ -8,7 +17,9 @@ use Symfony\Component\Validator\Constraints\Choice;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
- * @author Wouter J <wouter@wouterj.nl>
+ * Constructs the system to create a new wallet.
+ *
+ * @author Wouter de Jong <wouter@wouterj.nl>
  */
 class CreateWallet implements NamedMessage
 {

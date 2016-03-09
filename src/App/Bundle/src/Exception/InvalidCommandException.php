@@ -1,11 +1,23 @@
 <?php
 
+/*
+ * This file is part of the WouterJ Symfony Example package.
+ *
+ * (c) 2016 Wouter de Jong
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace App\Bundle\Exception;
 
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 
 /**
- * @author Wouter J <wouter@wouterj.nl>
+ * An exception that's thrown by the CommandBus ValidatorMiddleware
+ * when a command was invalid.
+ *
+ * @author Wouter de Jong <wouter@wouterj.nl>
  */
 class InvalidCommandException extends \RuntimeException
 {
@@ -18,7 +30,7 @@ class InvalidCommandException extends \RuntimeException
         $this->violationList = $violationList;
         $this->command = $command;
 
-        parent::__construct('Validation failed for this command.', $code);
+        parent::__construct('Validation failed for the `'.$command.'` command.', $code);
     }
 
     public function command()

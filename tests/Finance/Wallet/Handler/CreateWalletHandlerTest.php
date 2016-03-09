@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Finance\Transaction\Handler;
+namespace App\Finance\Wallet\Handler;
 
 use App\Finance\Wallet\Command\CreateWallet;
 use App\Finance\Wallet\Handler\CreateWalletHandler;

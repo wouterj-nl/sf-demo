@@ -1,0 +1,59 @@
+.wallet-list{
+  width:1500px;
+  margin:0 auto;
+}
+.wallet__name{
+  font-size:1.1em;
+  font-weight:500;
+  float:left;
+  margin:0;
+}
+.wallet{
+  background:#ddd;
+  padding:0 20px 20px;
+  width:350px;
+  float:left;
+  position:relative;
+  margin:25px 25px 0 0;
+  box-sizing:border-box;
+  overflow:hidden;
+  color:rgba(#000000, .87);
+
+  h3{
+    font-family:"Segoe UI";
+    font-size:.9em;
+  }
+}
+.wallet__money{
+  float:right;
+  margin-top:7px;
+}
+.wallet__header{
+  margin-top:.83em;
+
+  &:after{
+    content:'';
+    display:block;
+    clear:both;
+  }
+}
+.wallet--form{
+  background:none;
+  border:5px dashed #ddd;
+  opacity:.5;
+
+  &:hover{
+    opacity:1;
+  }
+}
+.wallet--ours:before, .wallet--theirs:before{
+  font-family:'FontAwesome';
+  display:block;
+  position:absolute;
+  bottom:-50px;
+  left:-10px;
+  font-size:200px;
+  color:rgba(#000000, .03);
+}
+.wallet--ours:before { content:"\f007"; }
+.wallet--theirs:before { content:"\f0ac"; }
