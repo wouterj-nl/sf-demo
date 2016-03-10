@@ -1,10 +1,4 @@
 services:
-    app.importer:
-        class: App\Finance\Transaction\Import\RabobankCsvImporter
-
-    app.guesser:
-        class: App\Finance\Transaction\Import\WalletGuesser
-
     app.form.book_transaction:
         class: App\Bundle\Form\BookTransactionForm
         arguments: ['@app.repository.wallet']

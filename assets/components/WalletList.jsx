@@ -3,7 +3,6 @@ import jQuery from 'jquery';
 
 import Wallet from 'components/Wallet';
 import WalletForm from 'components/WalletForm';
-import TransactionImportForm from 'components/TransactionImportForm';
 
 import 'style/wallet';
 
@@ -42,7 +41,6 @@ export default class extends React.Component {
             <div className="wallet-list">
                 {walletNodes}
                 <WalletForm onNewWallet={this.handleNewWallet} />
-                <TransactionImportForm />
             </div>
         );
     }

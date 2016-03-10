@@ -55,25 +55,4 @@ class TransactionController extends Controller
 
         return new JsonResponse(['transaction_id' => $id], JsonResponse::HTTP_CREATED);
     }
-
-    /**
-     * @Route("/api/transactions/import", name="import_transactions")
-     * @Method("POST")
-     */
-    public function import(Request $request)
-    {
-        $imports = $this->get('app.importer')->parseTransactions($request->getContent());
-
-        return new JsonResponse(array_map([$this, 'formatImport'], $imports));
-    }
-
-    private function formatImport(ImportedTransaction $transaction)
-    {
-        return [
-            'id'          => $transaction->id(),
-            'money'       => ['amount' => $transaction->money()->getAmount() / 100],
-            'date'        => $transaction->date()->format('c'),
-            'description' => $transaction->description(),
-        ];
-    }
 }

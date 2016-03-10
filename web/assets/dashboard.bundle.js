@@ -62,7 +62,7 @@
 
 	var _jquery2 = _interopRequireDefault(_jquery);
 
-	__webpack_require__(179);
+	__webpack_require__(178);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -19748,15 +19748,11 @@
 
 	var _Wallet2 = _interopRequireDefault(_Wallet);
 
-	var _WalletForm = __webpack_require__(170);
+	var _WalletForm = __webpack_require__(171);
 
 	var _WalletForm2 = _interopRequireDefault(_WalletForm);
 
-	var _TransactionImportForm = __webpack_require__(175);
-
-	var _TransactionImportForm2 = _interopRequireDefault(_TransactionImportForm);
-
-	__webpack_require__(177);
+	__webpack_require__(176);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -19811,8 +19807,7 @@
 	                'div',
 	                { className: 'wallet-list' },
 	                walletNodes,
-	                _react2.default.createElement(_WalletForm2.default, { onNewWallet: this.handleNewWallet }),
-	                _react2.default.createElement(_TransactionImportForm2.default, null)
+	                _react2.default.createElement(_WalletForm2.default, { onNewWallet: this.handleNewWallet })
 	            );
 	        }
 	    }]);
@@ -21453,7 +21448,7 @@
 
 	var _TransactionList2 = _interopRequireDefault(_TransactionList);
 
-	__webpack_require__(168);
+	__webpack_require__(169);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -21653,10 +21648,10 @@
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./transaction.scss\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var content = __webpack_require__(166);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(167)(content, {});
+	var update = __webpack_require__(168)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -21673,8 +21668,76 @@
 	}
 
 /***/ },
-/* 166 */,
+/* 166 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(167)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".transaction-list {\n  list-style: none;\n  padding: 0;\n  height: 150px;\n  overflow: auto;\n  position: relative;\n  z-index: 1; }\n", ""]);
+
+	// exports
+
+
+/***/ },
 /* 167 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	/*
+		MIT License http://www.opensource.org/licenses/mit-license.php
+		Author Tobias Koppers @sokra
+	*/
+	// css base code, injected by the css-loader
+	module.exports = function () {
+		var list = [];
+
+		// return the list of modules as css string
+		list.toString = function toString() {
+			var result = [];
+			for (var i = 0; i < this.length; i++) {
+				var item = this[i];
+				if (item[2]) {
+					result.push("@media " + item[2] + "{" + item[1] + "}");
+				} else {
+					result.push(item[1]);
+				}
+			}
+			return result.join("");
+		};
+
+		// import a list of modules into the list
+		list.i = function (modules, mediaQuery) {
+			if (typeof modules === "string") modules = [[null, modules, ""]];
+			var alreadyImportedModules = {};
+			for (var i = 0; i < this.length; i++) {
+				var id = this[i][0];
+				if (typeof id === "number") alreadyImportedModules[id] = true;
+			}
+			for (i = 0; i < modules.length; i++) {
+				var item = modules[i];
+				// skip already imported module
+				// this implementation is not 100% perfect for weird media query combinations
+				//  when a module is imported multiple times with different media queries.
+				//  I hope this will never occur (Hey this way we have smaller bundles)
+				if (typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
+					if (mediaQuery && !item[2]) {
+						item[2] = mediaQuery;
+					} else if (mediaQuery) {
+						item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
+					}
+					list.push(item);
+				}
+			}
+		};
+		return list;
+	};
+
+/***/ },
+/* 168 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -21928,16 +21991,16 @@
 
 
 /***/ },
-/* 168 */
+/* 169 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./badge.scss\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var content = __webpack_require__(170);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(167)(content, {});
+	var update = __webpack_require__(168)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -21954,8 +22017,21 @@
 	}
 
 /***/ },
-/* 169 */,
 /* 170 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(167)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".badge {\n  display: inline-block;\n  font-size: .8em;\n  padding: 2px 10px;\n  color: rgba(255, 255, 255, 0.7);\n  border-radius: 2px;\n  cursor: default; }\n\n.badge--green {\n  background: #4CAF50; }\n\n.badge--red {\n  background: #F44336; }\n\n.badge--neutral {\n  background: #9E9E9E; }\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 171 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21974,9 +22050,9 @@
 
 	var _jquery2 = _interopRequireDefault(_jquery);
 
-	__webpack_require__(171);
+	__webpack_require__(172);
 
-	__webpack_require__(173);
+	__webpack_require__(174);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -22078,16 +22154,16 @@
 	exports.default = _class;
 
 /***/ },
-/* 171 */
+/* 172 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./form.scss\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var content = __webpack_require__(173);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(167)(content, {});
+	var update = __webpack_require__(168)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -22104,17 +22180,30 @@
 	}
 
 /***/ },
-/* 172 */,
 /* 173 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(167)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "body > form {\n  margin: 0 auto;\n  width: 400px; }\n\ninput[type=text] {\n  border: 0;\n  background: none;\n  border-bottom: 1px solid #aaa;\n  margin-top: 10px;\n  margin-bottom: 1px;\n  font-size: inherit;\n  font-family: inherit;\n  font-weight: 200; }\n  input[type=text]:focus {\n    border-bottom: 2px solid #42A5F5;\n    margin-bottom: 0;\n    outline: none !important; }\n\n::-webkit-input-placeholder {\n  color: #888; }\n\ninput[type=submit] {\n  padding: 10px;\n  background: #42a5f5;\n  color: #ffffff;\n  font-weight: bold;\n  border: none; }\n\ninput.invalid {\n  border-bottom: 2px solid #F44336 !important;\n  margin-bottom: 0 !important; }\n\n.errors ul {\n  margin-top: 2px;\n  color: #E53935;\n  font-size: .7em;\n  font-weight: bold;\n  padding: 0;\n  list-style: none; }\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 174 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./action-button.scss\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var content = __webpack_require__(175);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(167)(content, {});
+	var update = __webpack_require__(168)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -22131,198 +22220,30 @@
 	}
 
 /***/ },
-/* 174 */,
 /* 175 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	exports = module.exports = __webpack_require__(167)();
+	// imports
 
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
 
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	// module
+	exports.push([module.id, ".action-button {\n  padding: 10px;\n  background: #42a5f5;\n  color: #ffffff;\n  font-weight: bold;\n  border: none;\n  text-decoration: none;\n  font-size: 14px; }\n\n.action-button--wallet {\n  bottom: 20px;\n  right: 20px;\n  position: absolute; }\n", ""]);
 
-	var _react = __webpack_require__(1);
+	// exports
 
-	var _react2 = _interopRequireDefault(_react);
-
-	var _jquery = __webpack_require__(160);
-
-	var _jquery2 = _interopRequireDefault(_jquery);
-
-	var _TransactionImport = __webpack_require__(176);
-
-	var _TransactionImport2 = _interopRequireDefault(_TransactionImport);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var _class = function (_React$Component) {
-	    _inherits(_class, _React$Component);
-
-	    function _class(props) {
-	        _classCallCheck(this, _class);
-
-	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(_class).call(this, props));
-
-	        _this.state = { transactions: [] };
-	        return _this;
-	    }
-
-	    _createClass(_class, [{
-	        key: 'handleFileSelect',
-	        value: function handleFileSelect(e) {
-	            var file = e.target.files[0];
-
-	            if ('text/plain' != file.type) {
-	                return;
-	            }
-
-	            var reader = new FileReader();
-
-	            reader.onload = function (e) {
-	                _jquery2.default.post({
-	                    url: '/api/transactions/import',
-	                    data: e.target.result,
-	                    dataType: 'json',
-	                    success: function (data) {
-	                        this.setState({ transactions: data });
-	                    }.bind(this)
-	                });
-	            }.bind(this);
-
-	            reader.readAsText(file);
-	        }
-	    }, {
-	        key: 'render',
-	        value: function render() {
-	            var transactionImportNodes = this.state.transactions.map(function (transaction) {
-	                return _react2.default.createElement(_TransactionImport2.default, { key: transaction.id, money: transaction.money.amount, description: transaction.description });
-	            });
-
-	            return _react2.default.createElement(
-	                'div',
-	                null,
-	                _react2.default.createElement('input', { type: 'file', onChange: this.handleFileSelect }),
-	                transactionImportNodes
-	            );
-	        }
-	    }]);
-
-	    return _class;
-	}(_react2.default.Component);
-
-	exports.default = _class;
 
 /***/ },
 /* 176 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	__webpack_require__(168);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var _class = function (_React$Component) {
-	    _inherits(_class, _React$Component);
-
-	    function _class(props) {
-	        _classCallCheck(this, _class);
-
-	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(_class).call(this, props));
-
-	        _this.state = { description: _this.props.description, money: _this.props.money };
-	        return _this;
-	    }
-
-	    _createClass(_class, [{
-	        key: 'handleDescriptionChange',
-	        value: function handleDescriptionChange(e) {
-	            this.setState({ description: e.target.value });
-	        }
-	    }, {
-	        key: 'render',
-	        value: function render() {
-	            return _react2.default.createElement(
-	                'form',
-	                null,
-	                _react2.default.createElement(
-	                    'span',
-	                    { className: 'badge  badge--neutral' },
-	                    this.state.money
-	                ),
-	                _react2.default.createElement('input', { type: 'text', value: this.state.description, onChange: this.handleDescriptionChange }),
-	                _react2.default.createElement(
-	                    'select',
-	                    null,
-	                    _react2.default.createElement(
-	                        'option',
-	                        { value: '1' },
-	                        'Something'
-	                    ),
-	                    _react2.default.createElement(
-	                        'option',
-	                        { value: '2' },
-	                        'Otherthing'
-	                    )
-	                ),
-	                _react2.default.createElement(
-	                    'select',
-	                    null,
-	                    _react2.default.createElement(
-	                        'option',
-	                        { value: '1' },
-	                        'Something'
-	                    ),
-	                    _react2.default.createElement(
-	                        'option',
-	                        { value: '2' },
-	                        'Otherthing'
-	                    )
-	                )
-	            );
-	        }
-	    }]);
-
-	    return _class;
-	}(_react2.default.Component);
-
-	exports.default = _class;
-
-/***/ },
-/* 177 */
-/***/ function(module, exports, __webpack_require__) {
-
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./wallet.scss\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var content = __webpack_require__(177);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(167)(content, {});
+	var update = __webpack_require__(168)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -22339,17 +22260,30 @@
 	}
 
 /***/ },
-/* 178 */,
-/* 179 */
+/* 177 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(167)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".wallet-list {\n  width: 1500px;\n  margin: 0 auto; }\n\n.wallet__name {\n  font-size: 1.1em;\n  font-weight: 500;\n  float: left;\n  margin: 0; }\n\n.wallet {\n  background: #ddd;\n  padding: 0 20px 20px;\n  width: 350px;\n  float: left;\n  position: relative;\n  margin: 25px 25px 0 0;\n  box-sizing: border-box;\n  overflow: hidden;\n  color: rgba(0, 0, 0, 0.87); }\n  .wallet h3 {\n    font-family: \"Segoe UI\";\n    font-size: .9em; }\n\n.wallet__money {\n  float: right;\n  margin-top: 7px; }\n\n.wallet__header {\n  margin-top: .83em; }\n  .wallet__header:after {\n    content: '';\n    display: block;\n    clear: both; }\n\n.wallet--form {\n  background: none;\n  border: 5px dashed #ddd;\n  opacity: .5; }\n  .wallet--form:hover {\n    opacity: 1; }\n\n.wallet--ours:before, .wallet--theirs:before {\n  font-family: 'FontAwesome';\n  display: block;\n  position: absolute;\n  bottom: -50px;\n  left: -10px;\n  font-size: 200px;\n  color: rgba(0, 0, 0, 0.03); }\n\n.wallet--ours:before {\n  content: \"\\F007\"; }\n\n.wallet--theirs:before {\n  content: \"\\F0AC\"; }\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 178 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./generic.scss\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var content = __webpack_require__(179);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(167)(content, {});
+	var update = __webpack_require__(168)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -22364,6 +22298,20 @@
 		// When the module is disposed, remove the <style> tags
 		module.hot.dispose(function() { update(); });
 	}
+
+/***/ },
+/* 179 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(167)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "body {\n  font-size: 16pt;\n  font-family: \"Roboto\", sans-serif; }\n\n.setup-wrapper {\n  background: #ddd;\n  width: 800px;\n  padding: 10px 30px 50px;\n  margin: 100px auto;\n  position: relative; }\n\n.page-name {\n  font-size: 3em;\n  color: #333;\n  font-weight: 400; }\n", ""]);
+
+	// exports
+
 
 /***/ }
 /******/ ]);
