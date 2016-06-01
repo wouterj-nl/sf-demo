@@ -23,7 +23,7 @@ class AppExtension extends Extension
         // The resources are seperated from the PHP code, so the
         // value passed to FileLocator is a bit different than
         // you're probably used to.
-        $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../../resources/services'));
+        $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../../Resources/services'));
 
         $loader->load('repositories.yml');
         $loader->load('services.yml');
