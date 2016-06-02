@@ -63,12 +63,13 @@ doctrine:
             money:
                 mapping: true
                 type: yml
-                dir: "%kernel.root_dir%/config/doctrine/money"
+                dir: "%kernel.root_dir%/config/doctrine/Money"
                 prefix: Money
+                is_bundle: false
             AppBundle:
                 mapping: true
                 type: yml
-                dir: "../resources/doctrine/"
+                dir: "../Resources/doctrine/"
                 prefix: App\Finance
 
 command_bus:
