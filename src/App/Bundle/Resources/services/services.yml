@@ -16,9 +16,3 @@ services:
         arguments: ['@validator']
         tags:
             - { name: command_bus_middleware }
-
-    app.validator.unique:
-        class: App\Bundle\Validator\UniqueValidator
-        arguments: ['@doctrine']
-        tags:
-            - { name: validator.constraint_validator, alias: app.validator.unique }
